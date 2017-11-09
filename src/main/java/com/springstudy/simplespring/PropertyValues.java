@@ -3,6 +3,9 @@ package com.springstudy.simplespring;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 属性集合
+ */
 public class PropertyValues {
 	private final List<PropertyValue> propertyValueList;
 	

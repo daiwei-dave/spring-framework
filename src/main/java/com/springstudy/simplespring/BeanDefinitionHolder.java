@@ -1,5 +1,8 @@
 package com.springstudy.simplespring;
 
+/**
+ * bean的包装
+ */
 public class BeanDefinitionHolder {
 	private final BeanDefinition beanDefinition;
 	private final String beanName;

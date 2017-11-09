@@ -4,8 +4,11 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * bean工厂
+ */
 public class BeanFactory {
-	// 用于存储bean的单例实体
+	// 用于存储bean的单例实体，key值为bean的id，value为Object的实例即对象，初始容量为64
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>(64);
 	// 用于存储beanDefinition
 	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<String, BeanDefinition>();
@@ -51,6 +54,7 @@ public class BeanFactory {
 		if(pvs != null) {
 			for(PropertyValue pv : pvs.getPropertyValueList()) {
 					Field field = bean.getClass().getDeclaredField(pv.getName());
+					//忽略java语法检查
 					field.setAccessible(true);
 					field.set(bean, pv.getValue());
 			}
