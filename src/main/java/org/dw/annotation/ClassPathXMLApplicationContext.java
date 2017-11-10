@@ -69,10 +69,10 @@ public class ClassPathXMLApplicationContext {
                             if (resource.name() != null && !"".equals(resource.name())) { // 判断是否指定name属性
                                 value = sigletons.get(resource.name());
                             } else {
-                                value = sigletons.get(field.getName()); // 没有指定name属性,那么根据字段名称寻找
+                                value = sigletons.get(field.getName()); // 没有指定name属性,那么根据字段名称寻找xml中是否有对应的id
                                 if (value == null) {
                                     for (String key : sigletons.keySet()) {
-                                        // 根据字段类型进行寻找
+                                        // xml中没有指定bean的id，则查看class的value是否是字段的类型超接口关系等
                                         if (field.getType().isAssignableFrom(sigletons.get(key).getClass())) {
                                             value = sigletons.get(key);
                                             break;

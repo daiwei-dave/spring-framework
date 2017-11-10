@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 封装Bean
- * @author zhangjim
+ * @author daiwei
  */
 public class BeanDefinition {
     private String id;

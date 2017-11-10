@@ -3,10 +3,12 @@ package org.dw.annotation.service.impl;
 import org.dw.annotation.MyResource;
 import org.dw.annotation.dao.PersonDao;
 import org.dw.annotation.service.PersonService;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by daiwei on 2017/11/9.
  */
+@Service("personService")
 public class PersonServiceImpl implements PersonService {
     @MyResource
     private PersonDao personDao;
