@@ -8,7 +8,7 @@ import org.dw.annotation.service.PersonService;
  * Created by daiwei on 2017/11/9.
  */
 public class PersonServiceImpl implements PersonService {
-    @MyResource(name="personDao")
+    @MyResource
     private PersonDao personDao;
     private String name;
     private Integer id;

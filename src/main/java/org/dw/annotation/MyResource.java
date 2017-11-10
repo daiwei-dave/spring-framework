@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 模拟spring的@Resource注解
  * Created by daiwei on 2017/11/9.
  */
 @Retention(RetentionPolicy.RUNTIME) // 指定注解保留的范围 (运行期)

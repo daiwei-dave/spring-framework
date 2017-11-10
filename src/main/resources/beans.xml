@@ -6,6 +6,6 @@
        xmlns:context="http://www.springframework.org/schema/c">
 
     <context:annotation-config />
-    <bean id="personDao" class="org.dw.annotation.dao.impl.PersonDaoImpl" />
+    <bean class="org.dw.annotation.dao.impl.PersonDaoImpl" />
     <bean id="personService" class="org.dw.annotation.service.impl.PersonServiceImpl" />
 </beans>
