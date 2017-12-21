@@ -1,10 +1,13 @@
-package org.dw.annotation.myComponent;
+package org.dw.annotation.component;
+
+
+import org.dw.annotation.component.CustomizeComponent;
 
 /**
  * Created by Administrator on 2017/12/3.
  */
 @CustomizeComponent
-public class ScanClass1 {
+public class ScanClass {
 
     public void print() {
         System.out.println("scanClass1");

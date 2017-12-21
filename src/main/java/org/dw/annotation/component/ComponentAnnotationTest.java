@@ -1,4 +1,4 @@
-package org.dw.annotation.myComponent;
+package org.dw.annotation.component;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
