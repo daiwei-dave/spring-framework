@@ -30,12 +30,13 @@ public class AisDispatcherServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		//获取路径
 		String pathInfo=req.getServletPath();
+		System.out.println(pathInfo.replaceAll("/", ""));
+		System.out.println(pathInfo.replaceAll("/", "").split("\\.")[0]);
 		String key = pathInfo.replaceAll("/", "").split("\\.")[0];
 		if (methodProMap.containsKey(key)) {
 			HandlerMapping.HandlerMapping(req,resp,methodProMap,key);//转发到映射器进行映射处理
-
 			return ;
 
 		}

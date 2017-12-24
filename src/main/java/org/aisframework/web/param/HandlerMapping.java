@@ -12,12 +12,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gaorui on 16/6/19.
+ *处理器适配器,找到合适的处理器去处理
+ * @Auther daiwei
+ * @date 2017/12/24
+ *
  */
 public class HandlerMapping {
-
+    /**
+     *方法映射
+     * <P>
+     *     寻找合适的方法并交给相应的方法去执行
+     * </P>
+     * @param req
+     * @param resp
+     * @param methodProMap
+     * @param key
+     */
     public static void  HandlerMapping(HttpServletRequest req,HttpServletResponse resp, Map<String,MethodPro> methodProMap, String key) {
-
         try {
 
         List<String> paramlist = MethodResolver.getMethodNames(methodProMap.get(key).getMethod().getDeclaringClass().getName(), key);
@@ -47,9 +58,8 @@ public class HandlerMapping {
                 req.getRequestDispatcher("WEB-INF/" + uri + ".html").forward(req, resp);
                 return;
 
-            //ajax接口处理
+            //ajax接口处理，即直接返回数据
             } else if (methodProMap.get(key).getAjax()) {
-
                 Object o = ReflectProcessor.parseMethod(method,test.class, key, invokeParamVulue);
                 resp.getWriter().print(o);
                 return;

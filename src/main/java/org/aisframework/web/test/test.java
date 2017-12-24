@@ -56,6 +56,7 @@ public class test {
      * @param userid
      * @return Object
      * 服务端处理前端ajax请求,返回json数据
+     *http://localhost:8080/getUser.do?userid=1&me=2
      */
     @MapURL(value = "getUser", RequestMethod = RequestMethod.GET)
     @ResponseBody
