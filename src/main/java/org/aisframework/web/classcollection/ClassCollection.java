@@ -23,6 +23,14 @@ public class ClassCollection {
     public static Map<String,MethodPro> methodMap;
     public static Set<Class<?>> classSet;
     public static Map<String,Class<?>> classMap;
+
+    /**
+     * 扫描包下面的组件
+     * <P>
+     *     主要扫描包下的方法映射
+     * </P>
+     * @param packageName
+     */
     public static void  scanClassSetByPackage(String packageName)
     {
         methodMap=new HashMap<String, MethodPro>();
