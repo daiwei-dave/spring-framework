@@ -15,7 +15,13 @@ import java.lang.reflect.Method;
 public class TargetObjectAspect extends AspectProxy {
 
     public void before(Class<?> cls, Method method, Object[] params) throws Throwable {
-        System.out.println("代理进行执行");
+        System.out.println("方法执行之前");
+        method.invoke(cls,params);
     }
+
+
+
+
+
 
 }
