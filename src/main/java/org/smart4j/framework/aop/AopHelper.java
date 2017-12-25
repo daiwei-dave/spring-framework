@@ -59,6 +59,11 @@ public class AopHelper {
         }
     }
 
+    /**
+     * 创建相关代理
+     * @return
+     * @throws Exception
+     */
     private static Map<Class<?>, List<Class<?>>> createProxyMap() throws Exception {
         Map<Class<?>, List<Class<?>>> proxyMap = new LinkedHashMap<Class<?>, List<Class<?>>>();
         // 添加相关代理
@@ -82,6 +87,11 @@ public class AopHelper {
         }
     }
 
+    /**
+     * 切面代理
+     * @param proxyMap
+     * @throws Exception
+     */
     private static void addAspectProxy(Map<Class<?>, List<Class<?>>> proxyMap) throws Exception {
         // 获取切面类（所有继承于 BaseAspect 的类）
         List<Class<?>> aspectProxyClassList = ClassHelper.getClassListBySuper(AspectProxy.class);
@@ -133,6 +143,12 @@ public class AopHelper {
         });
     }
 
+    /**
+     * 创建代理目标类列表
+     * @param aspect
+     * @return
+     * @throws Exception
+     */
     private static List<Class<?>> createTargetClassList(Aspect aspect) throws Exception {
         List<Class<?>> targetClassList = new ArrayList<Class<?>>();
         // 获取 Aspect 注解的相关属性
