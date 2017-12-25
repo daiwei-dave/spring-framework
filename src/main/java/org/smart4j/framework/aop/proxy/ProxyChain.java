@@ -8,7 +8,7 @@ import net.sf.cglib.proxy.MethodProxy;
 /**
  * 代理链
  *
- * @author huangyong
+ * @author daiwei
  * @since 2.0
  */
 public class ProxyChain {
@@ -43,14 +43,15 @@ public class ProxyChain {
         return targetMethod;
     }
 
+    /**
+     * 执行代理链
+     * @return
+     * @throws Throwable
+     */
     public Object doProxyChain() throws Throwable {
-        Object methodResult;
+        Object methodResult=null;
         if (proxyIndex < proxyList.size()) {
-            System.out.println("目标方法执行1");
             methodResult = proxyList.get(proxyIndex++).doProxy(this);
-        } else {
-            System.out.println("目标方法执行2");
-            methodResult = methodProxy.invokeSuper(targetObject, methodParams);
         }
         return methodResult;
     }
