@@ -1,6 +1,5 @@
 package org.aisframework.web.test;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.aisframework.web.annotation.Controller;
 import org.aisframework.web.annotation.MapURL;
@@ -10,16 +9,12 @@ import org.aisframework.web.structure.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by gaorui on 16/6/14.
  */
 @Controller
-public class test {
+public class UserController {
 
 
     /**
@@ -40,9 +35,10 @@ public class test {
 
 
     /**
+     * 服务端跳转页面处理,默认 web-inf下所有 .html文件
      * @author gaorui
      * @return String
-     * 服务端跳转页面处理,默认 web-inf下所有 .html文件
+     *
      */
     @MapURL(value="foward")
     public String foward(){
@@ -67,4 +63,24 @@ public class test {
         return jsonObject;
 
     }
+
+    /**
+     * 服务端处理前端ajax请求,返回json数据
+     * @author daiwei
+     * @param
+     * @return Object
+     *
+     *http://localhost:8080/getUser.do?userid=1&me=2
+     */
+    @MapURL(value = "getUserByUserObject", RequestMethod = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getUserByUserObject(User user){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("userName",user.getUserName());
+        return jsonObject;
+
+    }
+
+
+
 }

@@ -1,6 +1,7 @@
 package org.aisframework.web.utils;
 
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 
@@ -14,6 +15,9 @@ public class ReflectProcessor {
 
     /**
      * 方法处理
+     * <P>
+     *     用来绑定方法上的参数
+     * </P>
      * @param method
      * @param clazz
      * @param methodname
@@ -26,8 +30,11 @@ public class ReflectProcessor {
             value = new Object[]{};
         }
         Object o =null;
-        final Object obj = clazz.getConstructor(new Class[] {}).newInstance(new Object[] {});
-                    o = method.invoke(obj,value);
+        Constructor<?> clazzConstructor = clazz.getConstructor(new Class[]{});
+        Object obj = clazzConstructor.newInstance(new Object[]{});
+        System.out.println(obj.toString());
+        //执行对象里面的方法。即跳转到方法里面执行
+        o = method.invoke(obj,value);
         return o;
     }
 

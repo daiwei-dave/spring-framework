@@ -1,7 +1,7 @@
 package org.aisframework.web.param;
 
 import org.aisframework.web.structure.MethodPro;
-import org.aisframework.web.test.test;
+import org.aisframework.web.test.UserController;
 import org.aisframework.web.utils.CollectionUtils;
 import org.aisframework.web.utils.ReflectProcessor;
 
@@ -36,7 +36,7 @@ public class HandlerMapping {
         MethodPro methodPro = methodProMap.get(key);
         Method method = methodPro.getMethod();
         List<String> classNames = CollectionUtils.classArrToStringList(method.getParameterTypes());
-        Object[] invokeParamVulue = MethodResolver.paramarray(paramlist, classNames, req, resp, params);;
+        Object[] invokeParamVulue = MethodResolver.paramArray(paramlist, classNames, req, resp, params);;
         Method urlmethod = methodProMap.get(key).getMethod();
 
             String reqtype = req.getMethod().toUpperCase();
@@ -54,18 +54,19 @@ public class HandlerMapping {
             //String返回方法参数类型处理
             if (urlmethod.getReturnType().getName().equals("java.lang.String")) {
 
-                String uri = ReflectProcessor.parseMethod(method,test.class, key, invokeParamVulue).toString();
+                String uri = ReflectProcessor.parseMethod(method,UserController.class, key, invokeParamVulue).toString();
                 req.getRequestDispatcher("WEB-INF/" + uri + ".html").forward(req, resp);
                 return;
 
             //ajax接口处理，即直接返回数据
             } else if (methodProMap.get(key).getAjax()) {
-                Object o = ReflectProcessor.parseMethod(method,test.class, key, invokeParamVulue);
+                Object o = ReflectProcessor.parseMethod(method,UserController.class, key, invokeParamVulue);
+                //输出到客户端
                 resp.getWriter().print(o);
                 return;
             }
 
-            ReflectProcessor.parseMethod(method,test.class, key, invokeParamVulue);
+            ReflectProcessor.parseMethod(method,UserController.class, key, invokeParamVulue);
             return;
         } catch (Exception e) {
             e.printStackTrace();
