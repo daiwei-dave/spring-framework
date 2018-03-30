@@ -28,6 +28,10 @@ public class ClassCollection {
      * 扫描包下面的组件
      * <P>
      *     主要扫描包下的方法映射
+     *1)过滤只包含@Controller标识的类
+     *2)过滤只含有@MapURL注解的方法
+     *3)判断方法上是否有@ResponseBody注解，并进行相应标识
+     *4)注册类,注册方法
      * </P>
      * @param packageName
      */
