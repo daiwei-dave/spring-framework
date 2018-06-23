@@ -26,6 +26,10 @@ public class TestIoC {
 		// 3. 获取bean
 		HelloWorld hello = (HelloWorld) beanFactory.getBean("helloWorld");
 		System.out.println(hello.sayHello());
+
+		// 第二次获取bean，直接从内存中读取
+		HelloWorld hello2 = (HelloWorld) beanFactory.getBean("helloWorld");
+		System.out.println(hello2.sayHello());
 		assertEquals("Hello World!", hello.sayHello());
 	}
 
