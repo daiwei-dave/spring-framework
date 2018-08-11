@@ -51,6 +51,7 @@ public class TestIoC {
 		
 		// 3. 获取bean
 		HelloWorld hello = (HelloWorld) beanFactory.getBean("helloWorld");
+		System.out.println(hello.sayHello());
 		assertEquals("Hello IoC Property!", hello.sayHello());
 	}
 }
