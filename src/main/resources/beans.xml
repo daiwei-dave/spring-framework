@@ -5,12 +5,12 @@
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
        xmlns:context="http://www.springframework.org/schema/c">
 
-    <!--<context:annotation-config />-->
+    <context:annotation-config />
     <bean id="personDao" class="org.dw.annotation.dao.impl.PersonDaoImpl" />
     <bean id="personService" class="org.dw.annotation.service.impl.PersonServiceImpl" >
         <property name="name" value="zhangsan"/>
         <property name="id" value="123"/>
     </bean>
 
-    <context:component-scan base-package="org.dw.annotation"/>
+    <!--<context:component-scan base-package="org.dw.annotation"/>-->
 </beans>
