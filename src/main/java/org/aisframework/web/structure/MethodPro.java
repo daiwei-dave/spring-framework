@@ -3,11 +3,18 @@ package org.aisframework.web.structure;
 import java.lang.reflect.Method;
 
 /**
- * Created by lenovo on 2016/5/16.
+ * 方法信息
+ * Created by 代维 on 2016/5/16.
  */
 public class MethodPro {
+    /**
+     * 方法名
+     */
     private String name;
     private String url;
+    /**
+     * get 或者post方式
+     */
     private String urlStyle;
     private Method method;
     private Boolean isAjax;

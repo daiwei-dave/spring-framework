@@ -1,12 +1,13 @@
 
 package org.aisframework.web.servlet;
 
-import com.alibaba.fastjson.JSONObject;
+
 import org.aisframework.web.classcollection.ClassCollection;
 
 import org.aisframework.web.param.HandlerMapping;
 import org.aisframework.web.structure.MethodPro;
 import org.aisframework.web.utils.Config;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -21,10 +22,18 @@ import java.util.Map;
 
 public class AisDispatcherServlet extends HttpServlet {
 
+	private final String basePackage="org.aisframework.web.test";
+
 	private Map<String,MethodPro> methodProMap =null;
 	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
-		ClassCollection.scanClassSetByPackage(Config.getAnnoClassConfig("base-package"));//初始化配置下的 @Controller类
+		String annoClassConfig = Config.getAnnoClassConfig("base-package");
+		//防止未从配置问题找到basePackage
+		if (StringUtils.isBlank(annoClassConfig)){
+			annoClassConfig=basePackage;
+		}
+
+		ClassCollection.scanClassSetByPackage(annoClassConfig);//初始化配置下的 @Controller类
 		methodProMap = ClassCollection.getMethodMap();//拿到封装的每个类方法的属性
 	}
 
