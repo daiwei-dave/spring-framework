@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 /**
  * @author Jet
  */
-@Retention(RetentionPolicy.RUNTIME) //保留时间长短
-@Target(value = {ElementType.TYPE})//使用范围、接口、类、枚举、注解
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE})
 public @interface Aspect {
 
 }
