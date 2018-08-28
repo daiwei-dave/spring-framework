@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 /**
  * 方法切入点
  */
-@Retention(RetentionPolicy.RUNTIME)//保留时间长短
-@Target(value = {ElementType.METHOD}) //使用范围 方法
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.METHOD})
 public @interface PointCut {
 
     /**

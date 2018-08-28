@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+* Aspect declaration
  * @author Jet
  */
 @Retention(RetentionPolicy.RUNTIME)
