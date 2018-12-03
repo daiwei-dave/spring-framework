@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roger.core.mapper.GeneralMapper">
+    <!-- 根据主键查询数据 -->
+    <select id="selectByPrimaryKey" parameterType="map" resultType="hashMap">
+          select
+              <choose>
+                  <when test="columnNames != null and columnNames.size()>0">
+                      <foreach item="columnName" index="index" collection="columnNames" separator=",">
+                          ${columnName}
+                      </foreach>
+                  </when>
+                  <otherwise>
+                      *
+                  </otherwise>
+              </choose>
+          from ${tableName}
+          where ${primaryKey} = #{primaryValue}
+    </select>
+    <!-- 根据动态条件查询数据 -->
+    <select id="selectAdvanced" parameterType="map" resultType="hashmap">
+        select
+            <choose>
+                <when test="columnNames != null and columnNames.size()>0">
+                    <foreach item="columnName" index="index" collection="columnNames" separator=",">
+                        ${columnName}
+                    </foreach>
+                </when>
+                <otherwise>
+                    *
+                </otherwise>
+            </choose>
+        from ${tableName}
+        <if test="conditionExp != null">
+            <where>
+                ${conditionExp}
+            </where>
+        </if>
+        <if test="orderExp != null">
+            order by ${orderExp}
+        </if>
+        <if test="page != null">
+            limit #{page.startRowNo},#{page.pageSize}
+        </if>
+    </select>
+    <!-- 插入单个对象 -->
+    <insert id="insert" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+        insert into ${tableName}
+        <foreach collection="sqlColumns" item="sqlColumn" open="(" separator="," close=")">
+            ${sqlColumn.columnName}
+        </foreach>
+        values
+        <foreach collection="sqlColumns" item="sqlColumn" open="(" separator="," close=")">
+            <if test="sqlColumn.jdbcType == null">
+                #{sqlColumn.columnValue}
+            </if>
+            <if test="sqlColumn.jdbcType != null">
+                #{sqlColumn.columnValue,jdbcType=${sqlColumn.jdbcType}}
+            </if>
+        </foreach>
+    </insert>
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert" parameterType="map">
+        insert into ${tableName}
+        <foreach collection="columnNames" item="columnName" index="index" open="(" separator="," close=")">
+            ${columnName}
+        </foreach>
+        <foreach collection="dataList" item="sqlColumns" index="rowIndex" separator="union all">
+            (select
+              <foreach collection="sqlColumns" index="columnIndex" item="sqlColumn" separator=",">
+                  <if test="sqlColumn.jdbcType == null">
+                      #{sqlColumn.columnValue}
+                  </if>
+                  <if test="sqlColumn.jdbcType != null">
+                      #{sqlColumn.columnValue,jdbcType=${sqlColumn.jdbcType}}
+                  </if>
+              </foreach>
+            from dual)
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="map">
+          update ${tableName}
+          <set>
+              <foreach collection="sqlColumns" item="sqlColumn" index="index" separator=",">
+                  <if test="sqlColumn.columnValue != null">
+                      ${sqlColumn.columnName} =
+                      <if test="sqlColumn.jdbcType == null">
+                          #{sqlColumn.columnValue}
+                      </if>
+                      <if test="sqlColumn.jdbcType != null">
+                          #{sqlColumn.columnValue,jdbcType=${sqlColumn.jdbcType}}
+                      </if>
+                  </if>
+              </foreach>
+          </set>
+          <if test="conditionExp != null">
+            <where>
+                ${conditionExp}
+            </where>
+          </if>
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        delete from ${tableName}
+        where ${primaryKey} = #{primaryValue}
+    </delete>
+    <!--
+        1.高级删除
+        2.此操作需要谨慎，如果不传递删除条件，则会把整张表的数据情况
+    -->
+    <delete id="deleteAdvanced" parameterType="map">
+        delete from ${tableName}
+        <if test="conditionExp != null">
+            <where>
+                ${conditionExp}
+            </where>
+        </if>
+    </delete>
+</mapper>
