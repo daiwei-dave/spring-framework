@@ -19,6 +19,6 @@ public class UserServiceImpl implements UserService {
         userDao.insert(user);
         //利用最简单的构造异常来验证事务的回滚操作
         //通过回滚操作来和事务提交作对比
-        //int i = 1 / 0 ;
+        int i = 1 / 0 ;
     }
 }
